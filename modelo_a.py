@@ -92,18 +92,25 @@ def solve(location_data):
     return (
         # Limite superior da função objetivo
         model.ObjVal,
+        
         # Limite inferior da função objetivo
         model.ObjBound,
+
         # Tempo de execução
         model.Runtime,
+
         # Gap Relativo
         model.MIPGap,
+
         # Número de nós
         model.NodeCount,
+
         # Rotas escolhidas
         [(i, j) for i in range(location_count) for j in range(location_count) if chosen_route[i, j].X > 0.5],
+
         # Tempos de chegada em cada local
         [arrival_time[i].X for i in range(location_count)],
+
         # Tempo de atraso em cada local
         [delay_time[i].X for i in range(location_count)]
     )

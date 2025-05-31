@@ -24,16 +24,16 @@ def log_solution(instance_name, solution):
     ) = solution
         
     log_file_content = f"""
-created_at: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-instance_name: {instance_name}
-objective_upper_bound: {f"{objective_upper_bound:.2f}"}
-objective_lower_bound: {f"{objective_lower_bound:.2f}"}
-runtime: {runtime}
-relative_gap: {f"{relative_gap:.2f}"}
-node_count: {node_count}
-routes: {' '.join(map(str, routes))}
-arrival_times: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
-delay_times: {' '.join(map(lambda x: f"{x:.2f}", delay_times))}
+Dia e Hora do Processamento: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+Instância: {instance_name}
+Limite superior da funcao objetivo: {f"{objective_upper_bound:.2f}"}
+Limite inferior da funcao objetivo: {f"{objective_lower_bound:.2f}"}
+Tempo total de processamento: {runtime}
+Gap Relativo: {f"{relative_gap:.2f}"}
+Contagem de Nos: {node_count}
+Rotas: {' '.join(map(str, routes))}
+Horarios de Chegada: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
+Tempos de Atraso: {' '.join(map(lambda x: f"{x:.2f}", delay_times))}
 """
     
     if not os.path.exists("./resultados"):

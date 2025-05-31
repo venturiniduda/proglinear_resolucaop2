@@ -1,11 +1,11 @@
 
-created_at: 2025-05-31 17:57:08
-instance_name: inst_10
-objective_upper_bound: 116.88
-objective_lower_bound: 116.88
-runtime: 0.3580000400543213
-relative_gap: 0.00
-node_count: 1.0
-routes: (0, 2) (1, 8) (2, 7) (3, 4) (4, 6) (5, 3) (6, 9) (7, 5) (8, 1)
-arrival_times: 0.00 430.00 47.89 449.00 490.00 428.00 535.00 113.99 419.00 608.00
-delay_times: 0.00 0.00 30.89 0.00 0.00 0.00 0.00 85.99 0.00 0.00
+Dia e Hora do Processamento: 2025-05-31 18:19:18
+Instância: inst_10
+Limite superior da funcao objetivo: 116.88
+Limite inferior da funcao objetivo: 116.88
+Tempo total de processamento: 0.4699997901916504
+Gap Relativo: 0.00
+Contagem de Nos: 1.0
+Rotas: (0, 2) (1, 8) (2, 7) (3, 4) (4, 6) (5, 3) (6, 9) (7, 5) (8, 1)
+Horarios de Chegada: 0.00 430.00 47.89 449.00 490.00 428.00 535.00 113.99 419.00 608.00
+Tempos de Atraso: 0.00 0.00 30.89 0.00 0.00 0.00 0.00 85.99 0.00 0.00
