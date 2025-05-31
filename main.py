@@ -1,10 +1,9 @@
-
 import parametro
 import modelo_a
 import modelo_b
 import restricao
 import multiprocessing
-import tabelas_resultado
+import resolucao
 
 if __name__ == "__main__":
     instances = parametro.read_instances()
@@ -14,4 +13,4 @@ if __name__ == "__main__":
 
         for instance, result in zip(instances, results):
             instance_name, _ = instance
-            tabelas_resultado.log_solution(instance_name, result)
+            resolucao.log_solution(instance_name, result)

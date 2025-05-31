@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 ## FORMATAÇÃO DOS RESULTADOS EM TABELAS ##
 def log_solution(instance_name, solution):
     if solution is None:
-        with open(f"./outputs/solution_{instance_name}.txt", "w") as file:
-            file.write("Infeasible problem")
+        with open(f"./resultados/solucao_{instance_name}.txt", "w") as file:
+            file.write("Problema sem solução!")
         return
     
     (
@@ -36,10 +36,10 @@ arrival_times: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
 delay_times: {' '.join(map(lambda x: f"{x:.2f}", delay_times))}
 """
     
-    if not os.path.exists("./outputs"):
-      os.makedirs("./outputs")
+    if not os.path.exists("./resultados"):
+      os.makedirs("./resultados")
     
-    with open(f"./outputs/solution_{instance_name}.txt", "w") as file:
+    with open(f"./resultados/solucao_{instance_name}.txt", "w") as file:
         file.write(log_file_content)
 
 
