@@ -14,7 +14,7 @@ def solve(location_data):
     
     model = gurobipy.Model()
     model.setParam('TimeLimit', 3600) # 1 hora de timeout 
-    model.setParam('LogFile', './outputs/gurobi.log')
+    model.setParam('LogFile', './resultados/gurobi.log')
 
     # Variáveis de Decisão:
     ## representação de rotas escolhidas
