@@ -6,29 +6,30 @@ import matplotlib.pyplot as plt
 # Adicionar plot de tabelas, comparando resultados do modelo A e B
 
 ## FORMATAÇÃO DOS RESULTADOS EM TABELAS ##
-def log_solution(instance_name, solution):
-    if solution is None:
+def log_solution(instance_name, solution_a, solution_b):
+    if solution_a is None or solution_b is None:
         if not os.path.exists("./resultados"):
             os.makedirs("./resultados")
         with open(f"./resultados/solucao_{instance_name}.txt", "w") as file:
             file.write("Problema sem solução!")
         return
 
-    (
-        objective_upper_bound,
-        objective_lower_bound,
-        runtime,
-        relative_gap,
-        node_count,
-        routes,
-        arrival_times,
-        delay_times
-    ) = solution
+    def format_solution(label, solution, show_max_delay=False):
+        (
+            objective_upper_bound,
+            objective_lower_bound,
+            runtime,
+            relative_gap,
+            node_count,
+            routes,
+            arrival_times,
+            delay_times,
+            *rest  # para capturar o 8º valor se existir
+        ) = solution
 
-    # Cabeçalho geral
-    log_file_content = f"""
-Dia e Hora do Processamento: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-Instancia: {instance_name}
+        max_delay_str = f"\nMaior Tempo de Atraso (max delay): {rest[0]:.2f}" if show_max_delay and rest else ""
+
+        result = f"""
 Limite superior da funcao objetivo: {objective_upper_bound:.2f}
 Limite inferior da funcao objetivo: {objective_lower_bound:.2f}
 Tempo total de processamento: {runtime}
@@ -36,31 +37,36 @@ Gap Relativo: {relative_gap:.2f}
 Contagem de Nos: {node_count}
 Rotas: {' '.join(map(str, routes))}
 Horarios de Chegada: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
-Tempos de Atraso (compacto): {' '.join(map(lambda x: f"{x:.2f}", delay_times))}
-
-Tabela Detalhada:
+Tempos de Atraso (compacto): {' '.join(map(lambda x: f"{x:.2f}", delay_times))}{max_delay_str}
 
 +---------------------+----------------+------------------+
-|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A    |
+|   RESULTADO REFERENTE AO EXERCICIO 1 - {label:^12}   |
 +----------------+--------------------+-------------------+
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+
 """
-    
-    # Adiciona cada linha com os dados formatados
-    for point, arrival, delay in zip(routes, arrival_times, delay_times):
-        log_file_content += f"| {str(point):^14} | {arrival:^18.2f} | {delay:^17.2f} |\n"
+        for point, arrival, delay in zip(routes, arrival_times, delay_times):
+            result += f"| {str(point):^14} | {arrival:^18.2f} | {delay:^17.2f} |\n"
+        result += "+----------------+--------------------+-------------------+\n"
 
-    log_file_content += "+----------------+--------------------+-------------------+\n"
+        return result
 
-    # Garante que o diretório existe
+    log_file_content = f"""
+Dia e Hora do Processamento: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+Instancia: {instance_name}
+"""
+
+    log_file_content += "\nRESULTADO A:\n"
+    log_file_content += format_solution("ALTERNATIVA A", solution_a)
+
+    log_file_content += "\nRESULTADO B:\n"
+    log_file_content += format_solution("ALTERNATIVA B", solution_b, show_max_delay=True)
+
     if not os.path.exists("./resultados"):
         os.makedirs("./resultados")
 
-    # Salva o log no arquivo
     with open(f"./resultados/solucao_{instance_name}.txt", "w") as file:
         file.write(log_file_content)
-
 
 ## FORMATAÇÃO DOS RESULTADOS EM GRÁFICO ##
 def plot_solution(nodes, selected_route):

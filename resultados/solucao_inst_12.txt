@@ -1,19 +1,20 @@
 
-Dia e Hora do Processamento: 2025-05-31 18:34:56
+Dia e Hora do Processamento: 2025-05-31 18:57:07
 Instancia: inst_12
+
+RESULTADO A:
+
 Limite superior da funcao objetivo: 148.00
 Limite inferior da funcao objetivo: 148.00
-Tempo total de processamento: 0.4930000305175781
+Tempo total de processamento: 0.4509999752044678
 Gap Relativo: 0.00
 Contagem de Nos: 241.0
 Rotas: (0, 2) (1, 10) (2, 5) (3, 4) (4, 11) (5, 3) (6, 12) (7, 6) (8, 9) (9, 8) (10, 7) (11, 1)
 Horarios de Chegada: 0.00 468.00 101.00 304.00 289.00 267.00 690.00 572.00 416.00 367.00 559.00 390.00 738.00
 Tempos de Atraso (compacto): 0.00 0.00 0.00 148.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
 
-Tabela Detalhada:
-
 +---------------------+----------------+------------------+
-|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A    |
+|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A   |
 +----------------+--------------------+-------------------+
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+
@@ -29,4 +30,35 @@ Tabela Detalhada:
 |     (9, 8)     |       367.00       |       0.00        |
 |    (10, 7)     |       559.00       |       0.00        |
 |    (11, 1)     |       390.00       |       0.00        |
++----------------+--------------------+-------------------+
+
+RESULTADO B:
+
+Limite superior da funcao objetivo: 89.83
+Limite inferior da funcao objetivo: 89.83
+Tempo total de processamento: 0.309999942779541
+Gap Relativo: 0.00
+Contagem de Nos: 1.0
+Rotas: (0, 2) (1, 10) (2, 3) (3, 4) (4, 5) (5, 9) (6, 12) (7, 6) (8, 11) (9, 8) (10, 7) (11, 1)
+Horarios de Chegada: 0.00 509.99 101.00 197.76 289.00 355.70 753.03 656.00 428.86 387.39 579.97 479.83 801.00
+Tempos de Atraso (compacto): 0.00 89.83 89.83 89.83 89.83 89.83 89.83 89.83 89.83 89.83 89.83 89.83 0.00
+Maior Tempo de Atraso (max delay): 89.83
+
++---------------------+----------------+------------------+
+|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA B   |
++----------------+--------------------+-------------------+
+| PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
++----------------+--------------------+-------------------+
+|     (0, 2)     |        0.00        |       0.00        |
+|    (1, 10)     |       509.99       |       89.83       |
+|     (2, 3)     |       101.00       |       89.83       |
+|     (3, 4)     |       197.76       |       89.83       |
+|     (4, 5)     |       289.00       |       89.83       |
+|     (5, 9)     |       355.70       |       89.83       |
+|    (6, 12)     |       753.03       |       89.83       |
+|     (7, 6)     |       656.00       |       89.83       |
+|    (8, 11)     |       428.86       |       89.83       |
+|     (9, 8)     |       387.39       |       89.83       |
+|    (10, 7)     |       579.97       |       89.83       |
+|    (11, 1)     |       479.83       |       89.83       |
 +----------------+--------------------+-------------------+

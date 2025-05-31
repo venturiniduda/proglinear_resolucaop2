@@ -1,19 +1,20 @@
 
-Dia e Hora do Processamento: 2025-05-31 18:34:56
+Dia e Hora do Processamento: 2025-05-31 18:57:07
 Instancia: inst_10
+
+RESULTADO A:
+
 Limite superior da funcao objetivo: 116.88
 Limite inferior da funcao objetivo: 116.88
-Tempo total de processamento: 0.20600008964538574
+Tempo total de processamento: 0.17599987983703613
 Gap Relativo: 0.00
 Contagem de Nos: 1.0
 Rotas: (0, 2) (1, 8) (2, 7) (3, 4) (4, 6) (5, 3) (6, 9) (7, 5) (8, 1)
 Horarios de Chegada: 0.00 430.00 47.89 449.00 490.00 428.00 535.00 113.99 419.00 608.00
 Tempos de Atraso (compacto): 0.00 0.00 30.89 0.00 0.00 0.00 0.00 85.99 0.00 0.00
 
-Tabela Detalhada:
-
 +---------------------+----------------+------------------+
-|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A    |
+|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A   |
 +----------------+--------------------+-------------------+
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+
@@ -26,4 +27,32 @@ Tabela Detalhada:
 |     (6, 9)     |       535.00       |       0.00        |
 |     (7, 5)     |       113.99       |       85.99       |
 |     (8, 1)     |       419.00       |       0.00        |
++----------------+--------------------+-------------------+
+
+RESULTADO B:
+
+Limite superior da funcao objetivo: 116.87
+Limite inferior da funcao objetivo: 116.87
+Tempo total de processamento: 0.28600001335144043
+Gap Relativo: 0.00
+Contagem de Nos: 1.0
+Rotas: (0, 2) (1, 8) (2, 7) (3, 4) (4, 6) (5, 3) (6, 9) (7, 5) (8, 1)
+Horarios de Chegada: 0.00 430.00 47.89 449.00 552.52 428.00 535.00 144.87 431.00 608.00
+Tempos de Atraso (compacto): 0.00 116.87 116.87 116.87 116.87 116.87 116.87 116.87 116.87 0.00
+Maior Tempo de Atraso (max delay): 116.87
+
++---------------------+----------------+------------------+
+|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA B   |
++----------------+--------------------+-------------------+
+| PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
++----------------+--------------------+-------------------+
+|     (0, 2)     |        0.00        |       0.00        |
+|     (1, 8)     |       430.00       |      116.87       |
+|     (2, 7)     |       47.89        |      116.87       |
+|     (3, 4)     |       449.00       |      116.87       |
+|     (4, 6)     |       552.52       |      116.87       |
+|     (5, 3)     |       428.00       |      116.87       |
+|     (6, 9)     |       535.00       |      116.87       |
+|     (7, 5)     |       144.87       |      116.87       |
+|     (8, 1)     |       431.00       |      116.87       |
 +----------------+--------------------+-------------------+
