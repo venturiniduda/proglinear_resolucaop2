@@ -8,10 +8,12 @@ import matplotlib.pyplot as plt
 ## FORMATAÇÃO DOS RESULTADOS EM TABELAS ##
 def log_solution(instance_name, solution):
     if solution is None:
+        if not os.path.exists("./resultados"):
+            os.makedirs("./resultados")
         with open(f"./resultados/solucao_{instance_name}.txt", "w") as file:
             file.write("Problema sem solução!")
         return
-    
+
     (
         objective_upper_bound,
         objective_lower_bound,
@@ -22,23 +24,37 @@ def log_solution(instance_name, solution):
         arrival_times,
         delay_times
     ) = solution
-        
+
+    # Cabeçalho geral
     log_file_content = f"""
 Dia e Hora do Processamento: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-Instância: {instance_name}
-Limite superior da funcao objetivo: {f"{objective_upper_bound:.2f}"}
-Limite inferior da funcao objetivo: {f"{objective_lower_bound:.2f}"}
+Instancia: {instance_name}
+Limite superior da funcao objetivo: {objective_upper_bound:.2f}
+Limite inferior da funcao objetivo: {objective_lower_bound:.2f}
 Tempo total de processamento: {runtime}
-Gap Relativo: {f"{relative_gap:.2f}"}
+Gap Relativo: {relative_gap:.2f}
 Contagem de Nos: {node_count}
 Rotas: {' '.join(map(str, routes))}
 Horarios de Chegada: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
-Tempos de Atraso: {' '.join(map(lambda x: f"{x:.2f}", delay_times))}
+Tempos de Atraso (compacto): {' '.join(map(lambda x: f"{x:.2f}", delay_times))}
+
+Tabela de Tempos de Atraso:
++--------+-------------------+
+| INDICE | TEMPO DE ATRASO   |
++--------+-------------------+
 """
-    
+
+    # Adiciona cada linha da tabela com alinhamento fixo
+    for idx, delay in enumerate(delay_times):
+        log_file_content += f"| {idx:^6} | {delay:^17.2f} |\n"
+
+    log_file_content += "+--------+-------------------+\n"
+
+    # Garante que o diretório existe
     if not os.path.exists("./resultados"):
-      os.makedirs("./resultados")
-    
+        os.makedirs("./resultados")
+
+    # Salva o log no arquivo
     with open(f"./resultados/solucao_{instance_name}.txt", "w") as file:
         file.write(log_file_content)
 

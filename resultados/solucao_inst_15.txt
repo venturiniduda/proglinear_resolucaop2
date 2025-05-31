@@ -1,11 +1,32 @@
 
-Dia e Hora do Processamento: 2025-05-31 18:19:18
-Instância: inst_15
+Dia e Hora do Processamento: 2025-05-31 18:23:26
+Instancia: inst_15
 Limite superior da funcao objetivo: 382.83
 Limite inferior da funcao objetivo: 382.83
-Tempo total de processamento: 0.6909999847412109
+Tempo total de processamento: 0.6039998531341553
 Gap Relativo: 0.00
 Contagem de Nos: 88.0
 Rotas: (0, 8) (1, 10) (2, 6) (3, 12) (4, 7) (5, 4) (6, 1) (7, 13) (8, 11) (9, 3) (10, 14) (11, 9) (12, 5) (13, 2)
 Horarios de Chegada: 0.00 1001.83 927.60 295.00 712.00 533.00 952.82 794.22 36.67 200.01 1085.00 112.90 406.00 844.78 1163.00
-Tempos de Atraso: 0.00 130.83 103.60 0.00 0.00 0.00 28.82 24.22 18.67 49.01 0.00 9.90 0.00 17.78 0.00
+Tempos de Atraso (compacto): 0.00 130.83 103.60 0.00 0.00 0.00 28.82 24.22 18.67 49.01 0.00 9.90 0.00 17.78 0.00
+
+Tabela de Tempos de Atraso:
++--------+-------------------+
+| ÍNDICE | TEMPO DE ATRASO   |
++--------+-------------------+
+|   0    |       0.00        |
+|   1    |      130.83       |
+|   2    |      103.60       |
+|   3    |       0.00        |
+|   4    |       0.00        |
+|   5    |       0.00        |
+|   6    |       28.82       |
+|   7    |       24.22       |
+|   8    |       18.67       |
+|   9    |       49.01       |
+|   10   |       0.00        |
+|   11   |       9.90        |
+|   12   |       0.00        |
+|   13   |       17.78       |
+|   14   |       0.00        |
++--------+-------------------+
