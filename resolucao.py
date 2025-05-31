@@ -38,17 +38,20 @@ Rotas: {' '.join(map(str, routes))}
 Horarios de Chegada: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
 Tempos de Atraso (compacto): {' '.join(map(lambda x: f"{x:.2f}", delay_times))}
 
-Tabela de Tempos de Atraso:
-+--------+-------------------+
-| INDICE | TEMPO DE ATRASO   |
-+--------+-------------------+
+Tabela Detalhada:
+
++---------------------+----------------+------------------+
+|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A    |
++----------------+--------------------+-------------------+
+| PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
++----------------+--------------------+-------------------+
 """
+    
+    # Adiciona cada linha com os dados formatados
+    for point, arrival, delay in zip(routes, arrival_times, delay_times):
+        log_file_content += f"| {str(point):^14} | {arrival:^18.2f} | {delay:^17.2f} |\n"
 
-    # Adiciona cada linha da tabela com alinhamento fixo
-    for idx, delay in enumerate(delay_times):
-        log_file_content += f"| {idx:^6} | {delay:^17.2f} |\n"
-
-    log_file_content += "+--------+-------------------+\n"
+    log_file_content += "+----------------+--------------------+-------------------+\n"
 
     # Garante que o diretório existe
     if not os.path.exists("./resultados"):
