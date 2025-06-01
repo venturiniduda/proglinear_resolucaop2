@@ -69,19 +69,17 @@ Instancia: {instance_name}
         file.write(log_file_content)
 
 ## FORMATAÇÃO DOS RESULTADOS EM GRÁFICO ##
-def plot_solution(nodes, selected_route):
+def plot_resolucao(title, nodes, route):
     G = nx.DiGraph()
     pos = {i: (nodes[i][0], nodes[i][1]) for i in range(len(nodes))}
-    
-    G.add_nodes_from(pos.keys())
-    G.add_edges_from(selected_route)
-    
-    nx.draw(G, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=10, font_weight='bold', arrows=True)
-    
-    plt.axhline(0, color='black', lw=1)
-
+    G.add_nodes_from(pos)
+    G.add_edges_from(route)
+    plt.figure(figsize=(8, 6))
+    nx.draw(G, pos, with_labels=True, node_size=600, node_color='lightblue',
+            font_size=10, font_weight='bold', arrows=True, arrowstyle='->', connectionstyle='arc3,rad=0.1')
+    plt.title(title)
+    plt.grid(True)
     plt.show()
-    
         
     
     

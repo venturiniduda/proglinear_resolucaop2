@@ -1,17 +1,17 @@
 
-Dia e Hora do Processamento: 2025-05-31 18:57:07
+Dia e Hora do Processamento: 2025-06-01 00:15:55
 Instancia: inst_10
 
 RESULTADO A:
 
-Limite superior da funcao objetivo: 116.88
-Limite inferior da funcao objetivo: 116.88
-Tempo total de processamento: 0.17599987983703613
+Limite superior da funcao objetivo: 30.89
+Limite inferior da funcao objetivo: 30.89
+Tempo total de processamento: 0.17100000381469727
 Gap Relativo: 0.00
 Contagem de Nos: 1.0
-Rotas: (0, 2) (1, 8) (2, 7) (3, 4) (4, 6) (5, 3) (6, 9) (7, 5) (8, 1)
-Horarios de Chegada: 0.00 430.00 47.89 449.00 490.00 428.00 535.00 113.99 419.00 608.00
-Tempos de Atraso (compacto): 0.00 0.00 30.89 0.00 0.00 0.00 0.00 85.99 0.00 0.00
+Rotas: (0, 2) (1, 6) (2, 3) (3, 5) (4, 0) (5, 8) (6, 4) (7, 1) (8, 7)
+Horarios de Chegada: 0.00 430.00 47.89 449.00 490.00 428.00 535.00 28.00 427.00
+Tempos de Atraso (compacto): 0.00 0.00 30.89 0.00 0.00 0.00 0.00 0.00 0.00
 
 +---------------------+----------------+------------------+
 |   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A   |
@@ -19,21 +19,21 @@ Tempos de Atraso (compacto): 0.00 0.00 30.89 0.00 0.00 0.00 0.00 85.99 0.00 0.00
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+
 |     (0, 2)     |        0.00        |       0.00        |
-|     (1, 8)     |       430.00       |       0.00        |
-|     (2, 7)     |       47.89        |       30.89       |
-|     (3, 4)     |       449.00       |       0.00        |
-|     (4, 6)     |       490.00       |       0.00        |
-|     (5, 3)     |       428.00       |       0.00        |
-|     (6, 9)     |       535.00       |       0.00        |
-|     (7, 5)     |       113.99       |       85.99       |
-|     (8, 1)     |       419.00       |       0.00        |
+|     (1, 6)     |       430.00       |       0.00        |
+|     (2, 3)     |       47.89        |       30.89       |
+|     (3, 5)     |       449.00       |       0.00        |
+|     (4, 0)     |       490.00       |       0.00        |
+|     (5, 8)     |       428.00       |       0.00        |
+|     (6, 4)     |       535.00       |       0.00        |
+|     (7, 1)     |       28.00        |       0.00        |
+|     (8, 7)     |       427.00       |       0.00        |
 +----------------+--------------------+-------------------+
 
 RESULTADO B:
 
 Limite superior da funcao objetivo: 116.87
 Limite inferior da funcao objetivo: 116.87
-Tempo total de processamento: 0.28600001335144043
+Tempo total de processamento: 0.0559999942779541
 Gap Relativo: 0.00
 Contagem de Nos: 1.0
 Rotas: (0, 2) (1, 8) (2, 7) (3, 4) (4, 6) (5, 3) (6, 9) (7, 5) (8, 1)

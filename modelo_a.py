@@ -9,7 +9,7 @@ def get_distance(p1, p2):
     return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
 
 def solve(location_data):
-    location_data.append(location_data[0])
+    # location_data.append(location_data[0])
     location_count = len(location_data)
     
     model = gurobipy.Model()
@@ -34,15 +34,20 @@ def solve(location_data):
     )
 
     # Restrições:
-    ## Garantir que se chegue em um local apenas 1 vez
+    ## Garantir que cada local (incluindo depósito) deve ter uma entrada e uma saída
     model.addConstrs(
-        gurobipy.quicksum(chosen_route[i, j] for j in range(1, location_count) if i != j) == 1
-        for i in range(0, location_count - 1)
+        gurobipy.quicksum(chosen_route[i, j] for j in range(location_count) if i != j) == 1
+        for i in range(location_count)
     )
-    ## Garantir que se saia de um local apenas 1 vez
+
     model.addConstrs(
-        gurobipy.quicksum(chosen_route[i, j] for i in range(location_count - 1) if i != j) == 1
-        for j in range(1, location_count)
+        gurobipy.quicksum(chosen_route[i, j] for i in range(location_count) if i != j) == 1
+        for j in range(location_count)
+    )
+
+    ## Garantir que retornará para o depósito
+    model.addConstr(
+        gurobipy.quicksum(chosen_route[i, 0] for i in range(1, location_count)) == 1
     )
 
     ## Garantir que não haja sub-rotas
@@ -83,6 +88,15 @@ def solve(location_data):
         
         # Garantindo que o tempo de atraso seja maior ou igual ao tempo de atraso esperado ou 0
         model.addConstr(delay_time[i] >= delay_aux)
+
+    # Eliminação de sub-rotas com MTZ
+    u = model.addVars(location_count, vtype=gurobipy.GRB.CONTINUOUS, lb=0, ub=location_count - 1, name="u")
+
+    for i in range(1, location_count):
+        for j in range(1, location_count):
+            if i != j:
+                model.addConstr(u[i] - u[j] + (location_count - 1) * chosen_route[i, j] <= location_count - 2)
+
              
     model.optimize()
 
