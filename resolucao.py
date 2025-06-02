@@ -2,6 +2,7 @@ import os
 import datetime
 import networkx as nx
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch as patches
 
 # Adicionar plot de tabelas, comparando resultados do modelo A e B
 
@@ -30,7 +31,7 @@ def log_solution(instance_name, solution_a, solution_b):
         max_delay_str = f"\nMaior Tempo de Atraso (max delay): {rest[0]:.2f}" if show_max_delay and rest else ""
 
         result = f"""
-Limite superior da funcao objetivo: {objective_upper_bound:.2f}
+Limite superior da funcao objetivo (Atraso Total): {objective_upper_bound:.2f}
 Limite inferior da funcao objetivo: {objective_lower_bound:.2f}
 Tempo total de processamento: {runtime}
 Gap Relativo: {relative_gap:.2f}
@@ -71,15 +72,45 @@ Instancia: {instance_name}
 ## FORMATAÇÃO DOS RESULTADOS EM GRÁFICO ##
 def plot_resolucao(title, nodes, route):
     G = nx.DiGraph()
-    pos = {i: (nodes[i][0], nodes[i][1]) for i in range(len(nodes))}
-    G.add_nodes_from(pos)
+    G.add_nodes_from(range(len(nodes)))
     G.add_edges_from(route)
+
+    # Usar layout automático para evitar sobreposição
+    pos = nx.spring_layout(G, seed=42)  # semente fixa para reprodutibilidade
+
+    # Definir a cor dos nós: vermelho para o nó inicial (0), azul claro para os demais
+    node_colors = ['yellow' if i == 0 else 'lightblue' for i in G.nodes]
+
     plt.figure(figsize=(8, 6))
-    nx.draw(G, pos, with_labels=True, node_size=600, node_color='lightblue',
-            font_size=10, font_weight='bold', arrows=True, arrowstyle='->', connectionstyle='arc3,rad=0.1')
+    nx.draw(
+        G, pos,
+        with_labels=True,
+        node_size=600,
+        node_color=node_colors,
+        font_size=10,
+        font_weight='bold',
+        arrows=True,
+        arrowstyle='->',
+        connectionstyle='arc3,rad=0.1'
+    )
+
+     # Adiciona legenda
+    legend_elements = [
+        patches(facecolor='yellow', edgecolor='black', label='Ponto de Início'),
+        patches(facecolor='lightblue', edgecolor='black', label='Demais Pontos')
+    ]
+    plt.legend(handles=legend_elements, loc='lower left')
+
     plt.title(title)
     plt.grid(True)
-    plt.show()
+
+     # Salvar a figura
+    filename = title.replace(" ", "_") + '.png'
+    filepath = os.path.join('./resultados/imagens', filename)
+    plt.savefig(filepath, bbox_inches='tight')
+    plt.close()  # fecha a figura para liberar memória
+
+    # plt.show()
         
     
     

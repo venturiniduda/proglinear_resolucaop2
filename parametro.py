@@ -4,23 +4,46 @@ import os
 def read_instances():
     instances = []
     
-    paths = os.path.join("./instancias", "*.txt")
-
-    for file in glob.glob(paths):
-        with open(file, "r") as file:
-            lines = file.readlines()[1:]
-            locations_data = []
-
-            start_location_coords = list(map(int, lines[0].strip().split()))
-            locations_data.append((*start_location_coords, 0, 0))
-
-            for line in lines[1:]:
-                data = list(map(int, line.strip().split()))
-                coords, service_time, max_time = data[:2], data[2], data[3]
-
-                locations_data.append((*coords, service_time, max_time))
+    for filepath in glob.glob("./instancias/*.txt"):
+        with open(filepath, "r") as f:
+            lines = [line.strip() for line in f if line.strip()]  # Ignora linhas vazias
             
-            instance_name = file.name.split("/")[-1].split(".")[0].split("\\")[-1]
+            if not lines:
+                print(f"Arquivo vazio: {filepath}")
+                continue
+                
+            try:
+                num_points = int(lines[0])
+            except ValueError:
+                print(f"Formato inválido na primeira linha de {filepath}")
+                continue
+                
+            if len(lines) < num_points + 1:
+                print(f"Arquivo incompleto: {filepath} (esperava {num_points+1} linhas, encontrou {len(lines)})")
+                continue
+                
+            # Processa origem
+            try:
+                origem = list(map(int, lines[1].split()))
+                origem = (origem[0], origem[1], 0, 0)  # Garante (x,y,0,0)
+            except (IndexError, ValueError):
+                print(f"Coordenadas de origem inválidas em {filepath}")
+                continue
+                
+            locations_data = [origem]
+            
+            # Processa pontos de entrega
+            for line in lines[2:2+num_points]:
+                try:
+                    dados = list(map(int, line.split()))
+                    # Preenche com 0 se faltarem valores
+                    dados.extend([0]*(4-len(dados)))
+                    locations_data.append(tuple(dados[:4]))  # Pega só os 4 primeiros
+                except ValueError:
+                    print(f"Linha com formato inválido: {line} em {filepath}")
+                    locations_data.append((0, 0, 0, 0))  # Ponto inválido preenchido com 0s
+            
+            instance_name = os.path.splitext(os.path.basename(filepath))[0]
             instances.append((instance_name, locations_data))
     
     return instances
