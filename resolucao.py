@@ -70,7 +70,7 @@ Instancia: {instance_name}
         file.write(log_file_content)
 
 ## FORMATAÇÃO DOS RESULTADOS EM GRÁFICO ##
-def plot_resolucao(title, nodes, route):
+def plot_resolucao(instance_name, nodes, route):
     G = nx.DiGraph()
     G.add_nodes_from(range(len(nodes)))
     G.add_edges_from(route)
@@ -101,11 +101,11 @@ def plot_resolucao(title, nodes, route):
     ]
     plt.legend(handles=legend_elements, loc='lower left')
 
-    plt.title(title)
+    plt.title(instance_name)
     plt.grid(True)
 
      # Salvar a figura
-    filename = title.replace(" ", "_") + '.png'
+    filename = f"solucao_{instance_name}.png"
     filepath = os.path.join('./resultados/imagens', filename)
     plt.savefig(filepath, bbox_inches='tight')
     plt.close()  # fecha a figura para liberar memória
