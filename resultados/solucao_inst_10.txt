@@ -1,12 +1,12 @@
 
-Dia e Hora do Processamento: 2025-06-02 00:27:06
+Dia e Hora do Processamento: 2025-06-03 19:57:42
 Instancia: inst_10
 
 RESULTADO A:
 
 Limite superior da funcao objetivo (Atraso Total): 1755.88
 Limite inferior da funcao objetivo: 1755.88
-Tempo total de processamento: 1.0570001602172852
+Tempo total de processamento: 1.051999807357788
 Gap Relativo: 0.00
 Contagem de Nos: 26806.0
 Rotas: (0, 1) (1, 6) (2, 7) (3, 0) (4, 3) (5, 4) (6, 8) (7, 5) (8, 2)

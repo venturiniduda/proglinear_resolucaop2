@@ -35,27 +35,25 @@ def solve(location_data):
 
     # Função Objetivo:
     # minimizar o tempo de atraso total, consequentemente minimizar a multa total
-    # model.setObjective(
-    #     gp.quicksum(delay_time[i] for i in range(1, location_count - 1)),
-    #     sense = gp.GRB.MINIMIZE
-    # )
-
     model.setObjective(
         gp.quicksum(tempo_atraso[i] for i in range(1, location_count)),
         sense = gp.GRB.MINIMIZE
     )
 
     # Restrições:
-    ## Garantir que cada local (exceto depósito) deve ter uma entrada
-    model.addConstrs(
-        gp.quicksum(rotas_escolhidas[i, j] for i in range(location_count) if i != j) == 1
-        for j in range(1, location_count)
-    )
-
-    ## Garantir que cada local (incluindo depósito) deve ter uma saída
+    ## Cada local com 1 entrada e 1 saída
     model.addConstrs(
         gp.quicksum(rotas_escolhidas[i, j] for j in range(location_count) if i != j) == 1
         for i in range(location_count)
+    )
+    model.addConstrs(
+        gp.quicksum(rotas_escolhidas[i, j] for i in range(location_count) if i != j) == 1
+        for j in range(location_count)
+    )
+
+    ## Garantir que retornará para o depósito
+    model.addConstr(
+        gp.quicksum(rotas_escolhidas[i, 0] for i in range(1, location_count)) == 1
     )
 
     # Eliminação de sub-rotas com MTZ:
@@ -68,24 +66,18 @@ def solve(location_data):
             if i != j:
                 model.addConstr(u[i] - u[j] + (location_count - 1) * rotas_escolhidas[i, j] <= location_count - 2)
 
-    ## Garantir que retornará para o depósito
-    model.addConstr(
-        gp.quicksum(rotas_escolhidas[i, 0] for i in range(1, location_count)) == 1
-    )
-
     ## Garantir que, se a rota for utilizada, o tempo de chegada
     ## respeita o tempo de chegada da rota anterior + deslocamento + serviço:
     for i in range(location_count):
         for j in range(location_count):
-            if i == j:
-                continue
-            distancia = get_distance(location_data[i][:2], location_data[j][:2])
-            tempo_servico = location_data[i][2]
+            if i != j:
+                distancia = get_distance(location_data[i][:2], location_data[j][:2])
+                tempo_servico = location_data[i][2]
 
-            # Lembrete: a constante M é utilizada para garantir que, se a rota NÃO for escolhida, será ignorada
-            model.addConstr(
-                tempo_chegada[j] >= tempo_chegada[i] + tempo_servico + distancia - M * (1 - rotas_escolhidas[i, j])
-            )
+                # Lembrete: a constante M é utilizada para garantir que, se a rota NÃO for escolhida, será ignorada
+                model.addConstr(
+                    tempo_chegada[j] >= tempo_chegada[i] + tempo_servico + distancia - M * (1 - rotas_escolhidas[i, j])
+                )
         
     ## Garantir que o tempo de atraso em cada local seja maior ou igual ao tempo de chegada menos o tempo máximo permitido:
     # Atraso em relação ao deadline
