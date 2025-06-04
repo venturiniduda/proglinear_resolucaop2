@@ -76,7 +76,7 @@ def plot_resolucao(instance_name, nodes, route):
     G.add_edges_from(route)
     plt.figure(figsize=(8, 6))
     plt.axis('equal')
-    plt.margins(0.2)
+    plt.margins(0.3)
     
     # Definir a cor dos nós: vermelho para o nó inicial (0), azul claro para os demais
     node_colors = ['yellow' if i == 0 else 'lightblue' for i in G.nodes]
@@ -84,7 +84,7 @@ def plot_resolucao(instance_name, nodes, route):
     nx.draw(
         G, pos,
         with_labels=True,
-        node_size=200,
+        node_size=300,
         node_color=node_colors,
         font_size=10,
         font_weight='bold',

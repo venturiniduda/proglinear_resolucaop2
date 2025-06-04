@@ -44,32 +44,29 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
         gp.quicksum(chosen_route[i, 0] for i in range(1, location_count)) == 1
     )
 
-    # garantir que, se a rota for utilizada, o tempo de chegada
-    # respeita o tempo de chegada da rota anterior + deslocamento + serviço:
-    for i in range(location_count):
-        for j in range(location_count):
-            if i != j:
-                distancia = get_distance(location_data[i][:2], location_data[j][:2])
-                tempo_servico = location_data[i][2]
+    # garantir que não haja sub-rotas (MTZ)
+    for i in range(0, location_count - 1):     
+        for j in range(1, location_count): 
+            if i == j: 
+                continue             #garante que o tempo de chegada no ponto j leve em conta o tempo de: chegada ao ponto anterior (i), serviço no ponto i, deslocamento entre i e j 
 
-                model.addConstr(
-                    arrival_time[j] >= 
-                        arrival_time[i] + 
-                        tempo_servico +                     #so ativa a restraição se i -> j foi escolhida na chosen_route
-                        distancia - 
-                        M * (1 - chosen_route[i, j])
-                )
 
-    # eliminação de sub-rotas com MTZ:
-    # variável auxiliar para eliminação de sub-rotas:
-    u = model.addVars(location_count, vtype=gp.GRB.CONTINUOUS, lb=1, ub=location_count - 1, name="u")
+            location_i = location_data[i]
+            location_i_coords = (location_i[0], location_i[1])
+            location_i_service_time = location_i[2]
 
-    # adiciona a restrição:
-    # garante que o tempo de chegada no ponto j leve em conta o tempo de: chegada ao ponto anterior (i), serviço no ponto i, deslocamento entre i e j 
-    for i in range(1, location_count):
-        for j in range(1, location_count):
-            if i != j:
-                model.addConstr(u[i] - u[j] + (location_count - 1) * chosen_route[i, j] <= location_count - 2)
+            location_j = location_data[j]
+            location_j_coords = (location_j[0], location_j[1])
+            
+            time_between_locations = get_distance(location_i_coords, location_j_coords)
+
+            model.addConstr(
+                arrival_time[j] >= 
+                    arrival_time[i] +              #so ativa a restraição se i -> j foi escolhida na chosen_route
+                    time_between_locations +
+                    location_i_service_time 
+                    - M * (1 - chosen_route[i, j])
+            )
 
     ## Atrasos e cálculo do atraso máximo
     for i in range(1, location_count - 1): #força max_delay seja maior ou igual a qualquer atraso indiv (delay_time[i]) de cada lugar 
@@ -88,6 +85,7 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
     #delay_aux = arrival_time[i] tempo que passou do prazo 
     #delay_time[i] >= delay_aux define o atraso real como no minimo esse valor (ou zero)
     #max_delay >= delay_time[i] força que max_delay seja maior entre todos delay_time]
+
 
     if model.status != gp.GRB.OPTIMAL:
         return None
