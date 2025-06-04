@@ -41,7 +41,7 @@ Horarios de Chegada: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
 Tempos de Atraso (compacto): {' '.join(map(lambda x: f"{x:.2f}", delay_times))}{max_delay_str}
 
 +---------------------+----------------+------------------+
-|   RESULTADO REFERENTE AO EXERCICIO 1 - {label:^13}   |
+|   RESULTADO REFERENTE AO EXERCICIO 1 - {label:^14}   |
 +----------------+--------------------+-------------------+
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+
@@ -73,14 +73,12 @@ Instancia: {instance_name}
 def plot_resolucao(instance_name, nodes, route):
     G = nx.DiGraph()
     pos = {i: (nodes[i][0], nodes[i][1]) for i in range(len(nodes))}
-    G.add_nodes_from(pos)
     G.add_edges_from(route)
     plt.figure(figsize=(8, 6))
 
     # Definir a cor dos nós: vermelho para o nó inicial (0), azul claro para os demais
     node_colors = ['yellow' if i == 0 else 'lightblue' for i in G.nodes]
 
-    plt.figure(figsize=(8, 6))
     nx.draw(
         G, pos,
         with_labels=True,
