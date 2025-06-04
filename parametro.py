@@ -23,4 +23,4 @@ def read_instances():
         instance_name = f.name.split("/")[-1].split(".")[0].split("\\")[-1]
         instances.append((instance_name, location_data))
 
-        return instances
+    return instances
