@@ -6,7 +6,7 @@ import resolucao
 import gc
 
 if __name__ == "__main__":
-    instance_name, instances = parametro.read_instances()
+    instances = parametro.read_instances()
     start = time.time()
 
     for instance_name, location_data in instances:

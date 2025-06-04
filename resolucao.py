@@ -41,7 +41,7 @@ Horarios de Chegada: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
 Tempos de Atraso (compacto): {' '.join(map(lambda x: f"{x:.2f}", delay_times))}{max_delay_str}
 
 +---------------------+----------------+------------------+
-|   RESULTADO REFERENTE AO EXERCICIO 1 - {label:^12}   |
+|   RESULTADO REFERENTE AO EXERCICIO 1 - {label:^13}   |
 +----------------+--------------------+-------------------+
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+
@@ -72,11 +72,10 @@ Instancia: {instance_name}
 ## FORMATAÇÃO DOS RESULTADOS EM GRÁFICO ##
 def plot_resolucao(instance_name, nodes, route):
     G = nx.DiGraph()
-    G.add_nodes_from(range(len(nodes)))
+    pos = {i: (nodes[i][0], nodes[i][1]) for i in range(len(nodes))}
+    G.add_nodes_from(pos)
     G.add_edges_from(route)
-
-    # Usar layout automático para evitar sobreposição
-    pos = nx.spring_layout(G, seed=42)  # semente fixa para reprodutibilidade
+    plt.figure(figsize=(8, 6))
 
     # Definir a cor dos nós: vermelho para o nó inicial (0), azul claro para os demais
     node_colors = ['yellow' if i == 0 else 'lightblue' for i in G.nodes]
@@ -109,8 +108,6 @@ def plot_resolucao(instance_name, nodes, route):
     filepath = os.path.join('./resultados/imagens', filename)
     plt.savefig(filepath, bbox_inches='tight')
     plt.close()  # fecha a figura para liberar memória
-
-    # plt.show()
         
     
     
