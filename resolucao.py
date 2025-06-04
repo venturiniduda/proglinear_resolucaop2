@@ -82,7 +82,7 @@ def plot_resolucao(instance_name, nodes, route):
     nx.draw(
         G, pos,
         with_labels=True,
-        node_size=600,
+        node_size=200,
         node_color=node_colors,
         font_size=10,
         font_weight='bold',

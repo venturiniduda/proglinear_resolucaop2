@@ -1,42 +1,42 @@
 
-Dia e Hora do Processamento: 2025-06-02 00:16:01
+Dia e Hora do Processamento: 2025-06-03 22:48:29
 Instancia: inst_12
 
 RESULTADO A:
 
-Limite superior da funcao objetivo (Atraso Total): 3942.96
-Limite inferior da funcao objetivo: 3942.96
-Tempo total de processamento: 1364.3840000629425
+Limite superior da funcao objetivo (Atraso Total): 2973.11
+Limite inferior da funcao objetivo: 2973.11
+Tempo total de processamento: 661.4420001506805
 Gap Relativo: 0.00
-Contagem de Nos: 36885123.0
-Rotas: (0, 5) (1, 10) (2, 6) (3, 8) (4, 2) (5, 9) (6, 7) (7, 1) (8, 11) (9, 4) (10, 3) (11, 0)
-Horarios de Chegada: 746.18 836.83 684.65 819.15 714.03 677.66 690.00 774.08 767.69 709.35 816.33 728.18
-Tempos de Atraso (compacto): 0.00 368.83 583.65 663.15 425.03 410.66 0.00 202.08 351.69 342.35 257.33 338.18
+Contagem de Nos: 18753814.0
+Rotas: (0, 2) (1, 8) (2, 3) (3, 5) (4, 1) (5, 4) (6, 9) (7, 6) (8, 11) (9, 0) (10, 7) (11, 10)
+Horarios de Chegada: 706.48 596.00 736.97 734.61 643.07 684.49 690.00 635.03 639.07 738.95 559.00 590.92
+Tempos de Atraso (compacto): 0.00 128.00 635.97 578.61 354.07 417.49 0.00 63.03 223.07 371.95 0.00 200.92
 
 +---------------------+----------------+------------------+
-|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A   |
+|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA A    |
 +----------------+--------------------+-------------------+
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+
-|     (0, 5)     |       746.18       |       0.00        |
-|    (1, 10)     |       836.83       |      368.83       |
-|     (2, 6)     |       684.65       |      583.65       |
-|     (3, 8)     |       819.15       |      663.15       |
-|     (4, 2)     |       714.03       |      425.03       |
-|     (5, 9)     |       677.66       |      410.66       |
-|     (6, 7)     |       690.00       |       0.00        |
-|     (7, 1)     |       774.08       |      202.08       |
-|    (8, 11)     |       767.69       |      351.69       |
-|     (9, 4)     |       709.35       |      342.35       |
-|    (10, 3)     |       816.33       |      257.33       |
-|    (11, 0)     |       728.18       |      338.18       |
+|     (0, 2)     |       706.48       |       0.00        |
+|     (1, 8)     |       596.00       |      128.00       |
+|     (2, 3)     |       736.97       |      635.97       |
+|     (3, 5)     |       734.61       |      578.61       |
+|     (4, 1)     |       643.07       |      354.07       |
+|     (5, 4)     |       684.49       |      417.49       |
+|     (6, 9)     |       690.00       |       0.00        |
+|     (7, 6)     |       635.03       |       63.03       |
+|    (8, 11)     |       639.07       |      223.07       |
+|     (9, 0)     |       738.95       |      371.95       |
+|    (10, 7)     |       559.00       |       0.00        |
+|    (11, 10)    |       590.92       |      200.92       |
 +----------------+--------------------+-------------------+
 
 RESULTADO B:
 
 Limite superior da funcao objetivo (Atraso Total): 89.83
 Limite inferior da funcao objetivo: 89.83
-Tempo total de processamento: 0.034999847412109375
+Tempo total de processamento: 0.03099989891052246
 Gap Relativo: 0.00
 Contagem de Nos: 1.0
 Rotas: (0, 2) (1, 10) (2, 3) (3, 4) (4, 5) (5, 9) (6, 12) (7, 6) (8, 11) (9, 8) (10, 7) (11, 1)
@@ -45,7 +45,7 @@ Tempos de Atraso (compacto): 0.00 89.83 89.83 89.83 89.83 89.83 89.83 89.83 89.8
 Maior Tempo de Atraso (max delay): 89.83
 
 +---------------------+----------------+------------------+
-|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA B   |
+|   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA B    |
 +----------------+--------------------+-------------------+
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+

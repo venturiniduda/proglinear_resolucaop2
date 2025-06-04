@@ -1,5 +1,5 @@
 import math
-import gurobipy
+import gurobipy as gp
 
 M = 10 ** 7 #constante grande para restrição condicional (ativa e desativa restrição do tempo de chegada dependendo se uma rota foi escolhida)
 
@@ -13,29 +13,35 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
     location_count = len(location_data)
     
     #criar modelo 
-    model = gurobipy.Model()
+    model = gp.Model()
     model.setParam('TimeLimit', 3600)  # limite de tempo de ' hr 
     model.setParam('LogFile', './resultados/gurobi.log') #caminho p log 
 
     # variáveis de decisão:
-    chosen_route = model.addVars(location_count, location_count, vtype=gurobipy.GRB.BINARY, name='chosen_route')   #1 se a rota vai de i e j, 0 se não (binária 1)
-    arrival_time = model.addVars(location_count, vtype=gurobipy.GRB.CONTINUOUS, name='arrival_time', lb=0) #tempo de chegada no local i 
-    delay_time = model.addVars(location_count, vtype=gurobipy.GRB.CONTINUOUS, name='delay_time', lb=0) #quanto passou do prazo no local j 
-    max_delay = model.addVar(vtype=gurobipy.GRB.CONTINUOUS, name='max_delay', lb=0) #qual maior atraso entre todos os lugares (contínua 2,3,4 )
+    chosen_route = model.addVars(location_count, location_count, vtype=gp.GRB.BINARY, name='chosen_route')   #1 se a rota vai de i e j, 0 se não (binária 1)
+    arrival_time = model.addVars(location_count, vtype=gp.GRB.CONTINUOUS, name='arrival_time', lb=0) #tempo de chegada no local i 
+    delay_time = model.addVars(location_count, vtype=gp.GRB.CONTINUOUS, name='delay_time', lb=0) #quanto passou do prazo no local j 
+    max_delay = model.addVar(vtype=gp.GRB.CONTINUOUS, name='max_delay', lb=0) #qual maior atraso entre todos os lugares (contínua 2,3,4 )
 
     # função objetivo: encontra e a rota que minimize o maior atraso 
-    model.setObjective(max_delay, sense=gurobipy.GRB.MINIMIZE)        #minimiza o valor da variavel max_delay - pq ao inves de somar os atrasos 
+    model.setObjective(max_delay, sense=gp.GRB.MINIMIZE)        #minimiza o valor da variavel max_delay - pq ao inves de somar os atrasos 
                                                                       #queremos evitar q qqlr lugar fique mt atrasado (pequenos atrasos em todos p evitar um grande atraso em um)
     
 
-    # restrições: cada local deve ser visitado exatamente uma vez
+    # restrições: 
+    # cada local deve ser visitado exatamente uma vez
     model.addConstrs(
-        gurobipy.quicksum(chosen_route[i, j] for j in range(1, location_count) if i != j) == 1 #garante que sai de um lugar so 1 vez
+        gp.quicksum(chosen_route[i, j] for j in range(1, location_count) if i != j) == 1 #garante que sai de um lugar so 1 vez
         for i in range(0, location_count - 1)
     )
     model.addConstrs(
-        gurobipy.quicksum(chosen_route[i, j] for i in range(location_count - 1) if i != j) == 1 #garante que chega em cada lugar so 1 vez
+        gp.quicksum(chosen_route[i, j] for i in range(location_count - 1) if i != j) == 1 #garante que chega em cada lugar so 1 vez
         for j in range(1, location_count)
+    )
+
+    # grantir que retornará para o depósito
+    model.addConstr(
+        gp.quicksum(chosen_route[i, 0] for i in range(1, location_count)) == 1
     )
 
     # garantir que não haja sub-rotas (MTZ)
@@ -69,7 +75,7 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
         expected_delay_time = arrival_time[i] - deadline
         
         # Variável auxiliar para tempo de atraso
-        delay_aux = model.addVar(vtype=gurobipy.GRB.CONTINUOUS, name=f'delay_aux_{i}', lb=0)
+        delay_aux = model.addVar(vtype=gp.GRB.CONTINUOUS, name=f'delay_aux_{i}', lb=0)
         model.addConstr(delay_aux == expected_delay_time)
         model.addConstr(delay_time[i] >= delay_aux)
         model.addConstr(max_delay >= delay_time[i])
@@ -81,7 +87,7 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
     #max_delay >= delay_time[i] força que max_delay seja maior entre todos delay_time]
 
 
-    if model.status != gurobipy.GRB.OPTIMAL:
+    if model.status != gp.GRB.OPTIMAL:
         return None
 
 #otimiza resultado 
