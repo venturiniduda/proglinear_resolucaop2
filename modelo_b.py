@@ -14,7 +14,7 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
     
     #criar modelo 
     model = gp.Model()
-    model.setParam('TimeLimit', 3600)  # limite de tempo de ' hr 
+    # model.setParam('TimeLimit', 3600)  # limite de tempo de ' hr 
     model.setParam('LogFile', './resultados/gurobi.log') #caminho p log 
 
     # variáveis de decisão:
@@ -67,6 +67,10 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
                     location_i_service_time 
                     - M * (1 - chosen_route[i, j])
             )
+
+    # garante que a chegada ao depósito (0) ocorra por último
+    for i in range(1, location_count - 1):  # exceto o depósito
+        model.addConstr(arrival_time[0] >= arrival_time[i] + 1)
 
     ## Atrasos e cálculo do atraso máximo
     for i in range(1, location_count - 1): #força max_delay seja maior ou igual a qualquer atraso indiv (delay_time[i]) de cada lugar 

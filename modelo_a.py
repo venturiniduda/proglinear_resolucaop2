@@ -19,7 +19,7 @@ def solve(location_data):
     model.setParam('OutputFlag', 1)
 
     # Define 1 hora de timeout (tempo limite de processamento):
-    model.setParam('TimeLimit', 3600)
+    # model.setParam('TimeLimit', 3600)
     # Para salvar os retornos do Gurobi:
     model.setParam('LogFile', './resultados/gurobi.log')
 
