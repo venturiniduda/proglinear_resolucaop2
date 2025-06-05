@@ -49,6 +49,12 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
         gp.quicksum(chosen_route[i, 0] for i in range(1, location_count - 1)) == 1
     )
 
+    # impedir que o retorno ao depósito aconteça antes de visitar todos os clientes
+    for i in range(1, location_count - 1):
+        model.addConstr(
+            arrival_time[0] >= arrival_time[i] + 1 - M * (1 - chosen_route[i, 0])
+        )
+
     # garantir que não haja sub-rotas (MTZ)
     for i in range(0, location_count - 1):     
         for j in range(1, location_count): 
