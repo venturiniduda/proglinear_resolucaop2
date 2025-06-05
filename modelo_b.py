@@ -11,10 +11,10 @@ def get_distance(p1, p2):
 def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele deve voltar ao ponto inicial // e conta numero de locais (retorno tb)
     location_data.append(location_data[0])  # volta ao ponto inicial
     location_count = len(location_data)
-    
+
     #criar modelo 
     model = gp.Model()
-    # model.setParam('TimeLimit', 3600)  # limite de tempo de ' hr 
+    model.setParam('TimeLimit', 3600)  # limite de tempo de ' hr 
     model.setParam('LogFile', './resultados/gurobi.log') #caminho p log 
 
     # variáveis de decisão:
@@ -39,9 +39,14 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
         for j in range(1, location_count)
     )
 
-    # grantir que retornará para o depósito
+    # sair do depósito apenas uma vez
     model.addConstr(
-        gp.quicksum(chosen_route[i, 0] for i in range(1, location_count)) == 1
+        gp.quicksum(chosen_route[0, j] for j in range(1, location_count)) == 1
+    )
+
+    # garantir que retorná para o depósito apenas uma vez (como última aresta)
+    model.addConstr(
+        gp.quicksum(chosen_route[i, 0] for i in range(1, location_count - 1)) == 1
     )
 
     # garantir que não haja sub-rotas (MTZ)
@@ -49,7 +54,6 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
         for j in range(1, location_count): 
             if i == j: 
                 continue             #garante que o tempo de chegada no ponto j leve em conta o tempo de: chegada ao ponto anterior (i), serviço no ponto i, deslocamento entre i e j 
-
 
             location_i = location_data[i]
             location_i_coords = (location_i[0], location_i[1])
@@ -67,10 +71,6 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
                     location_i_service_time 
                     - M * (1 - chosen_route[i, j])
             )
-
-    # garante que a chegada ao depósito (0) ocorra por último
-    for i in range(1, location_count - 1):  # exceto o depósito
-        model.addConstr(arrival_time[0] >= arrival_time[i] + 1)
 
     ## Atrasos e cálculo do atraso máximo
     for i in range(1, location_count - 1): #força max_delay seja maior ou igual a qualquer atraso indiv (delay_time[i]) de cada lugar 
