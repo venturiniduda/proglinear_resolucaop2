@@ -11,10 +11,10 @@ def get_distance(p1, p2):
 def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele deve voltar ao ponto inicial // e conta numero de locais (retorno tb)
     location_data.append(location_data[0])  # volta ao ponto inicial
     location_count = len(location_data)
-
+    
     #criar modelo 
     model = gp.Model()
-    model.setParam('TimeLimit', 3600)  # limite de tempo de ' hr 
+    model.setParam('TimeLimit', 3600)  # limite de tempo de 1 hr 
     model.setParam('LogFile', './resultados/gurobi.log') #caminho p log 
 
     # variáveis de decisão:
@@ -27,33 +27,29 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
     model.setObjective(max_delay, sense=gp.GRB.MINIMIZE)        #minimiza o valor da variavel max_delay - pq ao inves de somar os atrasos 
                                                                       #queremos evitar q qqlr lugar fique mt atrasado (pequenos atrasos em todos p evitar um grande atraso em um)
     
-
     # restrições: 
-    # cada local deve ser visitado exatamente uma vez
+
+    # Cada local (exceto depósito 0) sai exatamente 1 vez
     model.addConstrs(
-        gp.quicksum(chosen_route[i, j] for j in range(1, location_count) if i != j) == 1 #garante que sai de um lugar so 1 vez
-        for i in range(0, location_count - 1)
+        gp.quicksum(chosen_route[i, j] for j in range(location_count) if i != j) == 1
+        for i in range(1, location_count)
     )
+
+    # Cada local (exceto depósito 0) chega exatamente 1 vez
     model.addConstrs(
-        gp.quicksum(chosen_route[i, j] for i in range(location_count - 1) if i != j) == 1 #garante que chega em cada lugar so 1 vez
+        gp.quicksum(chosen_route[i, j] for i in range(location_count) if i != j) == 1
         for j in range(1, location_count)
     )
 
-    # sair do depósito apenas uma vez
+    # Do depósito (0) sai exatamente 1 vez (início da rota)
     model.addConstr(
         gp.quicksum(chosen_route[0, j] for j in range(1, location_count)) == 1
     )
 
-    # garantir que retorná para o depósito apenas uma vez (como última aresta)
+    # Para depósito (0) chega exatamente 1 vez (fim da rota)
     model.addConstr(
-        gp.quicksum(chosen_route[i, 0] for i in range(1, location_count - 1)) == 1
+        gp.quicksum(chosen_route[i, 0] for i in range(1, location_count)) == 1
     )
-
-    # impedir que o retorno ao depósito aconteça antes de visitar todos os clientes
-    for i in range(1, location_count - 1):
-        model.addConstr(
-            arrival_time[0] >= arrival_time[i] + 1 - M * (1 - chosen_route[i, 0])
-        )
 
     # garantir que não haja sub-rotas (MTZ)
     for i in range(0, location_count - 1):     
@@ -82,6 +78,7 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
     for i in range(1, location_count - 1): #força max_delay seja maior ou igual a qualquer atraso indiv (delay_time[i]) de cada lugar 
         location_i = location_data[i]       #max_delay é o maior valor entre todos os atrasos 
         deadline = location_i[3]            #se atraso = 1,2,3 ... max_delay = gurobi escolhe 3 e otimizador encontra uma nova rota ex:2.5
+        
         expected_delay_time = arrival_time[i] - deadline
         
         # Variável auxiliar para tempo de atraso
@@ -96,11 +93,10 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
     #delay_time[i] >= delay_aux define o atraso real como no minimo esse valor (ou zero)
     #max_delay >= delay_time[i] força que max_delay seja maior entre todos delay_time]
 
-
     if model.status != gp.GRB.OPTIMAL:
         return None
 
-#otimiza resultado 
+    #otimiza resultado 
     return (
         model.ObjVal,  # valor da função objetivo (maior atraso)
         model.ObjBound, #bound inferior

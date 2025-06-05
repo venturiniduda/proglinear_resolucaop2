@@ -1,12 +1,12 @@
 
-Dia e Hora do Processamento: 2025-06-04 23:22:21
+Dia e Hora do Processamento: 2025-06-04 23:33:37
 Instancia: inst_10
 
 RESULTADO A:
 
 Limite superior da funcao objetivo (Atraso Total): 1450.51
 Limite inferior da funcao objetivo: 1450.51
-Tempo total de processamento: 8.016999959945679
+Tempo total de processamento: 8.01200008392334
 Gap Relativo: 0.00
 Contagem de Nos: 27326.0
 Rotas: (0, 5) (1, 6) (2, 1) (3, 8) (4, 7) (5, 3) (6, 0) (7, 2) (8, 4)
@@ -31,29 +31,29 @@ Tempos de Atraso (compacto): 0.00 100.22 579.58 0.00 44.21 67.58 0.00 564.84 94.
 
 RESULTADO B:
 
-Limite superior da funcao objetivo (Atraso Total): 116.87
-Limite inferior da funcao objetivo: 116.87
-Tempo total de processamento: 0.026000022888183594
+Limite superior da funcao objetivo (Atraso Total): 431.06
+Limite inferior da funcao objetivo: 431.06
+Tempo total de processamento: 5.38100004196167
 Gap Relativo: 0.00
-Contagem de Nos: 1.0
-Rotas: (0, 2) (1, 0) (1, 6) (2, 7) (3, 8) (4, 9) (5, 3) (6, 4) (7, 5) (8, 1)
-Horarios de Chegada: 0.00 496.71 47.89 449.00 490.00 428.00 535.00 144.87 419.00 585.00
-Tempos de Atraso (compacto): 0.00 116.87 116.87 116.87 116.87 116.87 116.87 116.87 116.87 0.00
-Maior Tempo de Atraso (max delay): 116.87
+Contagem de Nos: 241.0
+Rotas: (0, 7) (1, 2) (2, 0) (2, 1) (3, 8) (4, 6) (5, 3) (6, 9) (7, 4) (8, 5)
+Horarios de Chegada: 392.29 430.00 391.29 880.06 490.00 859.06 535.00 459.06 850.06 571.00
+Tempos de Atraso (compacto): 0.00 431.06 431.06 431.06 431.06 431.06 431.06 431.06 431.06 0.00
+Maior Tempo de Atraso (max delay): 431.06
 
 +---------------------+----------------+------------------+
 |   RESULTADO REFERENTE AO EXERCICIO 1 - ALTERNATIVA B    |
 +----------------+--------------------+-------------------+
 | PONTO DA ROTA  | HORA DE CHEGADA    | TEMPO DE ATRASO   |
 +----------------+--------------------+-------------------+
-|     (0, 2)     |        0.00        |       0.00        |
-|     (1, 0)     |       496.71       |      116.87       |
-|     (1, 6)     |       47.89        |      116.87       |
-|     (2, 7)     |       449.00       |      116.87       |
-|     (3, 8)     |       490.00       |      116.87       |
-|     (4, 9)     |       428.00       |      116.87       |
-|     (5, 3)     |       535.00       |      116.87       |
-|     (6, 4)     |       144.87       |      116.87       |
-|     (7, 5)     |       419.00       |      116.87       |
-|     (8, 1)     |       585.00       |       0.00        |
+|     (0, 7)     |       392.29       |       0.00        |
+|     (1, 2)     |       430.00       |      431.06       |
+|     (2, 0)     |       391.29       |      431.06       |
+|     (2, 1)     |       880.06       |      431.06       |
+|     (3, 8)     |       490.00       |      431.06       |
+|     (4, 6)     |       859.06       |      431.06       |
+|     (5, 3)     |       535.00       |      431.06       |
+|     (6, 9)     |       459.06       |      431.06       |
+|     (7, 4)     |       850.06       |      431.06       |
+|     (8, 5)     |       571.00       |       0.00        |
 +----------------+--------------------+-------------------+
