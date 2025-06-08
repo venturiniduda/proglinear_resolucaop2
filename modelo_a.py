@@ -41,7 +41,7 @@ def solve(location_data):
     
     model = gp.Model()
     model.setParam('OutputFlag', 1)
-    model.setParam('TimeLimit', 60)
+    model.setParam('TimeLimit', 600)
     model.setParam('LazyConstraints', 1)
     model.setParam('LogFile', './resultados/gurobi.log')
 

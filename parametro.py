@@ -23,7 +23,7 @@ def read_instances():
         for line in lines[2:]:
             parts = list(map(int, line.split()))
             location_data.append(parts)
-        
+            
         instance_name = os.path.basename(filepath)
         instance_name = os.path.splitext(instance_name)[0]
         
