@@ -3,7 +3,7 @@ import math
 import gurobipy as gp
 
 # Constante suficientemente grande para desativar as subrotas
-M = 10 ** 7
+# M = 10 ** 7
 
 ## O modelo:
 def get_distance(p1, p2):
@@ -25,13 +25,13 @@ def solve(location_data):
 
     # Variáveis de Decisão:
     ## representação de rotas escolhidas (x)
-    rotas_escolhidas = model.addVars(location_count, location_count, vtype=gp.GRB.BINARY, name='rotas_escolhidas')
+    rotas_escolhidas = model.addVars([(i, j) for i in range(location_count) for j in range(location_count) if i != j], vtype=gp.GRB.BINARY, name='rotas_escolhidas')
 
     ## representação do tempo de chegada em cada local (y)
-    tempo_chegada = model.addVars(location_count, vtype=gp.GRB.CONTINUOUS, name='tempo_chegada', lb=0)
+    tempo_chegada = model.addVars(range(location_count), vtype=gp.GRB.CONTINUOUS, name='tempo_chegada', lb=0)
 
     ## representação do tempo de atraso em cada local (w)
-    tempo_atraso = model.addVars(location_count, vtype=gp.GRB.CONTINUOUS, name='tempo_atraso', lb=0)
+    tempo_atraso = model.addVars(range(location_count), vtype=gp.GRB.CONTINUOUS, name='tempo_atraso', lb=0)
 
     # Função Objetivo:
     # minimizar o tempo de atraso total, consequentemente minimizar a multa total
@@ -44,11 +44,16 @@ def solve(location_data):
     ## Cada local com 1 entrada e 1 saída
     model.addConstrs(
         gp.quicksum(rotas_escolhidas[i, j] for j in range(location_count) if i != j) == 1
-        for i in range(location_count)
+        for i in range(1, location_count)
     )
     model.addConstrs(
         gp.quicksum(rotas_escolhidas[i, j] for i in range(location_count) if i != j) == 1
-        for j in range(location_count)
+        for j in range(1, location_count)
+    )
+
+    ## Garantir que sai do depósito
+    model.addConstr(
+        gp.quicksum(rotas_escolhidas[0, j] for j in range(1, location_count)) == 1
     )
 
     ## Garantir que retornará para o depósito
@@ -68,8 +73,14 @@ def solve(location_data):
 
     ## Garantir que, se a rota for utilizada, o tempo de chegada
     ## respeita o tempo de chegada da rota anterior + deslocamento + serviço:
-    for i in range(location_count):
-        for j in range(location_count):
+    # Definindo M:
+    M = sum(m[3] for m in location_data)
+
+    # Definindo tempo de início fixo no depósito:
+    model.addConstr(tempo_chegada[0] == 0)
+
+    for i in range(1, location_count):
+        for j in range(1, location_count):
             if i != j:
                 distancia = get_distance(location_data[i][:2], location_data[j][:2])
                 tempo_servico = location_data[i][2]
@@ -81,11 +92,15 @@ def solve(location_data):
         
     ## Garantir que o tempo de atraso em cada local seja maior ou igual ao tempo de chegada menos o tempo máximo permitido:
     # Atraso em relação ao deadline
-    for i in range(1, location_count):
-        deadline = location_data[i][3]
-        delay_aux = model.addVar(vtype=gp.GRB.CONTINUOUS, lb=0, name=f'delay_aux_{i}')
-        model.addConstr(delay_aux == tempo_chegada[i] - deadline)
-        model.addConstr(tempo_atraso[i] >= delay_aux)
+    # for i in range(location_count):
+    #     deadline = location_data[i][3]
+    #     delay_aux = model.addVar(vtype=gp.GRB.CONTINUOUS, lb=0, name=f'delay_aux_{i}')
+    #     model.addConstr(delay_aux == tempo_chegada[i] - deadline)
+    #     model.addConstr(tempo_atraso[i] >= delay_aux)
+
+    # Cálculo do atraso
+    model.addConstrs(tempo_atraso[i] >= tempo_chegada[i] - location_data[i][3] for i in range(location_count))
+    model.addConstrs(tempo_atraso[i] >= 0 for i in range(location_count))
              
     model.optimize()
 
