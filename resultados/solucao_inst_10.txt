@@ -1,35 +1,37 @@
-Dia e Hora do Processamento: 2025-06-08 18:44:02
+Dia e Hora do Processamento: 2025-06-08 19:11:12
 Instancia: inst_10
 
-Resultado A (Atraso Total): 147.76 (Tempo: 0.20s)
+Resultado A (Atraso Total): 147.76 (Tempo: 1.32s)
 +---------------+-----------------+---------------+
 | Ponto da Rota | Hora de Chegada | Tempo de Atraso |
 +---------------+-----------------+---------------+
 |       0       |      0.00       |      0.00       |
+|       9       |      0.00       |      0.00       |
 |       2       |      47.89      |      30.89      |
 |       7       |     144.87      |     116.87      |
 |       5       |     191.19      |      0.00       |
 |       3       |     236.86      |      0.00       |
-|       8       |     300.94      |      0.00       |
-|       1       |     378.65      |      0.00       |
-|       4       |     459.76      |      0.00       |
-|       6       |     511.77      |      0.00       |
+|       8       |     324.16      |      0.00       |
+|       1       |     401.87      |      0.00       |
+|       4       |     482.98      |      0.00       |
+|       6       |     535.00      |      0.00       |
 +---------------+-----------------+---------------+
 Nota: A rota completa, incluindo o arco de retorno ao Centro de Distribuição (Ponto 0), está representada no gráfico.
 
 Resultado B (Atraso Maior): 116.87
-Maior Atraso: 116.87 (Tempo: 0.68s)
+Maior Atraso: 116.87 (Tempo: 2.21s)
 +---------------+-----------------+---------------+
 | Ponto da Rota | Hora de Chegada | Tempo de Atraso |
 +---------------+-----------------+---------------+
 |       0       |      0.00       |      0.00       |
+|       9       |      0.00       |      0.00       |
 |       2       |      47.89      |      30.89      |
 |       7       |     144.87      |     116.87      |
-|       8       |     235.84      |      0.00       |
-|       3       |     298.93      |      0.00       |
-|       5       |     341.59      |      0.00       |
-|       1       |     468.63      |      38.63      |
-|       6       |     555.82      |      20.82      |
-|       4       |     604.84      |     114.84      |
+|       3       |     214.57      |      0.00       |
+|       5       |     259.20      |      0.00       |
+|       8       |     351.22      |      0.00       |
+|       4       |     454.76      |      0.00       |
+|       1       |     546.87      |     116.87      |
+|       6       |     651.87      |     116.87      |
 +---------------+-----------------+---------------+
 Nota: A rota completa, incluindo o arco de retorno ao Centro de Distribuição (Ponto 0), está representada no gráfico.
