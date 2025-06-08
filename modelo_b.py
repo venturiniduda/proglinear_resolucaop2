@@ -87,6 +87,8 @@ def solve(location_data): #coloca ponto de 'start' no final para mostrar que ele
         model.addConstr(delay_time[i] >= delay_aux)
         model.addConstr(max_delay >= delay_time[i])
 
+    # Configurar solver: ativa cortes GMI
+    model.setParam('GomoryPasses', 1)
     model.optimize()
 
     #delay_aux = arrival_time[i] tempo que passou do prazo 

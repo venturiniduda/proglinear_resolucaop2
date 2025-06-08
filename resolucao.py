@@ -24,7 +24,17 @@ def log_solution(instance_name, solution_a, solution_b, selected_model):
             *rest
         ) = solution
 
-        max_delay_str = f"\nMaior Tempo de Atraso (max delay): {rest[0]:.2f}" if show_max_delay and rest else ""
+        def fmt(value):
+            return "0.00" if abs(value) == -0.00 else f"{value:.2f}"
+
+        max_delay_str = f"\nMaior Tempo de Atraso (max delay): {fmt(rest[0])}" if show_max_delay and rest else ""
+
+        data = list(zip(routes, arrival_times, delay_times))
+        data_sorted = sorted(data, key=lambda x: x[1])
+
+        # # Junta dados e ordena por horário de chegada
+        data_sorted = list(zip(routes, arrival_times, delay_times))
+        # data_sorted = sorted(data, key=lambda x: x[1])
 
         data_sorted = list(zip(routes, arrival_times, delay_times))
 
@@ -35,8 +45,8 @@ Tempo total de processamento: {runtime}
 Gap Relativo: {relative_gap:.2f}
 Contagem de Nos: {node_count}
 Rotas: {' '.join(map(str, routes))}
-Horarios de Chegada: {' '.join(map(lambda x: f"{x:.2f}", arrival_times))}
-Tempos de Atraso (compacto): {' '.join(map(lambda x: f"{x:.2f}", delay_times))}{max_delay_str}
+Horarios de Chegada: {' '.join(map(fmt, arrival_times))}
+Tempos de Atraso (compacto): {' '.join(map(fmt, delay_times))}{max_delay_str}
 
 +---------------------+----------------+------------------+-------------------+
 |   RESULTADO REFERENTE AO EXERCICIO 1 - {label:^14}   |
@@ -46,6 +56,7 @@ Tempos de Atraso (compacto): {' '.join(map(lambda x: f"{x:.2f}", delay_times))}{
 """
         for point, arrival, delay in data_sorted:
             result += f"| {str(point):^14} | {arrival:^18.2f} | {delay:^17.2f} |\n"
+            result += f"| {str(point):^14} | {fmt(arrival):^18} | {fmt(delay):^17} |\n"
         result += "+----------------+--------------------+-------------------+\n"
         return result
 
