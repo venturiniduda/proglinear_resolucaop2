@@ -1,7 +1,7 @@
-Dia e Hora do Processamento: 2025-06-08 19:11:11
+Dia e Hora do Processamento: 2025-06-09 22:48:50
 Instancia: inst_17
 
-Resultado A (Atraso Total): 0.00 (Tempo: 0.54s)
+Resultado A (Atraso Total): 0.00 (Tempo: 0.44s)
 +---------------+-----------------+---------------+
 | Ponto da Rota | Hora de Chegada | Tempo de Atraso |
 +---------------+-----------------+---------------+
@@ -26,7 +26,7 @@ Resultado A (Atraso Total): 0.00 (Tempo: 0.54s)
 Nota: A rota completa, incluindo o arco de retorno ao Centro de Distribuição (Ponto 0), está representada no gráfico.
 
 Resultado B (Atraso Maior): 0.00
-Maior Atraso: 0.00 (Tempo: 3.00s)
+Maior Atraso: 0.00 (Tempo: 2.73s)
 +---------------+-----------------+---------------+
 | Ponto da Rota | Hora de Chegada | Tempo de Atraso |
 +---------------+-----------------+---------------+

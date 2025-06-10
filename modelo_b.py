@@ -38,7 +38,7 @@ def get_distance(p1, p2):
 
 ## O modelo principal:
 def solve(location_data):
-    # Número total de locais (incluindo o depósito)
+    # Número total de locais (incluindo o ponto de partida)
     location_count = len(location_data) 
 
     # Cria um dicionário com todas as distâncias entre pares de pontos
@@ -51,7 +51,7 @@ def solve(location_data):
     # Criação do modelo Gurobi
     model = gp.Model("Modelo_B")
     model.setParam('OutputFlag', 1)       # Exibe log no terminal
-    model.setParam('TimeLimit', 600)      # Limite de tempo de 10 minutos
+    model.setParam('TimeLimit', 900)      # Limite de tempo de 10 minutos
     model.setParam('LazyConstraints', 1)  # Permite o uso de lazy constraints (para subtours)
     model.setParam('LogFile', './resultados/gurobi.log')  # Arquivo de log
 

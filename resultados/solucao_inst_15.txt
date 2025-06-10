@@ -1,27 +1,26 @@
-Dia e Hora do Processamento: 2025-06-08 19:26:06
+Dia e Hora do Processamento: 2025-06-09 22:45:42
 Instancia: inst_15
 
-RESULTADO A: NENHUMA SOLUÇÃO ENCONTRADA A TEMPO
-
-Resultado B (Atraso Maior): 49.01
-Maior Atraso: 49.01 (Tempo: 297.90s)
+Resultado A (Atraso Total): 77.28 (Tempo: 1085.07s)
 +---------------+-----------------+---------------+
 | Ponto da Rota | Hora de Chegada | Tempo de Atraso |
 +---------------+-----------------+---------------+
 |       0       |      0.00       |      0.00       |
 |      14       |      0.00       |      0.00       |
 |       8       |      36.67      |      18.67      |
-|      11       |     112.90      |      9.90       |
-|       9       |     200.01      |      49.01      |
-|       3       |     254.90      |      0.00       |
-|      13       |     297.75      |      0.00       |
-|       7       |     355.31      |      0.00       |
-|       5       |     425.34      |      0.00       |
-|      12       |     455.01      |      49.01      |
-|      10       |     501.09      |      0.00       |
-|       1       |     578.49      |      0.00       |
-|       2       |     628.81      |      0.00       |
-|       4       |     700.71      |      0.00       |
-|       6       |     777.79      |      0.00       |
+|       9       |      65.50      |      0.00       |
+|      11       |     161.60      |      58.60      |
+|       3       |     244.61      |      0.00       |
+|      13       |     287.46      |      0.00       |
+|       5       |     370.86      |      0.00       |
+|      12       |     400.52      |      0.00       |
+|       1       |     451.87      |      0.00       |
+|      10       |     524.27      |      0.00       |
+|       2       |     562.36      |      0.00       |
+|       4       |     634.26      |      0.00       |
+|       7       |     716.47      |      0.00       |
+|       6       |     924.00      |      0.00       |
 +---------------+-----------------+---------------+
 Nota: A rota completa, incluindo o arco de retorno ao Centro de Distribuição (Ponto 0), está representada no gráfico.
+
+RESULTADO B: NENHUMA SOLUÇÃO ENCONTRADA A TEMPO

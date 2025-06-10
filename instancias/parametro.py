@@ -32,9 +32,9 @@ def read_instances():
             parts = list(map(int, line.split()))
             location_data.append(parts)
 
-        # Verifica se último ponto é o depósito; se não, adiciona
-        if not is_last_point_depot(location_data):
-            location_data.append(location_data[0])  # Adiciona retorno ao depósito
+        # # Verifica se último ponto é o depósito; se não, adiciona
+        # if not is_last_point_depot(location_data):
+        #     location_data.append(location_data[0])  # Adiciona retorno ao depósito
 
         instance_name = os.path.basename(filepath)
         instance_name = os.path.splitext(instance_name)[0]

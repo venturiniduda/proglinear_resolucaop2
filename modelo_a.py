@@ -46,7 +46,7 @@ def solve(location_data):
     # Criação do modelo Gurobi
     model = gp.Model()
     model.setParam('OutputFlag', 1)  # Exibe saída no terminal
-    model.setParam('TimeLimit', 600)  # Tempo limite de execução (em segundos)
+    model.setParam('TimeLimit', 900)  # Tempo limite de execução (em segundos)
     model.setParam('LazyConstraints', 1)  # Habilita restrições lazy (para subtours)
     model.setParam('LogFile', './resultados/gurobi.log')  # Salva o log em um arquivo
 
