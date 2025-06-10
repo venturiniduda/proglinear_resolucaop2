@@ -1,5 +1,5 @@
 import time
-import instancias.parametro as parametro
+import parametro as parametro
 import modelo_a
 import modelo_b
 import resolucao
